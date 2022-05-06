@@ -1,11 +1,17 @@
+var throttle = require('lodash.throttle');
+
 const iframe = document.querySelector('iframe');
 const player = new Vimeo.Player(iframe);
 
-player.on('timeupdate', function (data) {
-  localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
-});
-const savedTime = localStorage.getItem('videoplayer-current-time');
-const parsedCurrentTime = JSON.parse(savedTime);
+player.on(
+  'timeupdate',
+  throttle(function saveCurrentTime(data) {
+    console.log('Upsss');
+    localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
+  }, 500),
+);
+
+const parsedCurrentTime = JSON.parse(localStorage.getItem('videoplayer-current-time'));
 
 player.setCurrentTime(parsedCurrentTime.seconds).catch(function (error) {
   switch (error.name) {
@@ -17,9 +23,5 @@ player.setCurrentTime(parsedCurrentTime.seconds).catch(function (error) {
       // some other error occurred
       break;
   }
-});
-
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
 });
 // localStorage.clear();

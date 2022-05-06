@@ -5,7 +5,7 @@ import { galleryItems } from './gallery-items';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const galleryContainer = document.querySelector('.gallery');
+const galleryContainerRef = document.querySelector('.gallery');
 
 const galleryItemsCard = galleryItems
   .map(({ preview, original, description }) => {
@@ -15,7 +15,7 @@ const galleryItemsCard = galleryItems
   })
   .join('');
 
-galleryContainer.insertAdjacentHTML('afterbegin', galleryItemsCard);
+galleryContainerRef.insertAdjacentHTML('afterbegin', galleryItemsCard);
 
 let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
