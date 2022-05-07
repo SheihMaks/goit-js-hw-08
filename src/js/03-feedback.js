@@ -1,7 +1,9 @@
 const formRef = document.querySelector('.feedback-form');
-const formInput = document.querySelector('input');
-
-console.log(formInput);
+const formInputRef = document.querySelector('input[name = "email"]');
+const formMessageRef = document.querySelector('textarea[name="message"]');
+console.log(formInputRef);
+console.log(formMessageRef);
+onPaste();
 
 const formData = {};
 
@@ -19,14 +21,14 @@ const onSubmitForm = ev => {
 formRef.addEventListener('submit', onSubmitForm);
 formRef.addEventListener('input', onInputValue);
 // localStorage.clear();
-// console.log()
-// function onPaste() {
-//   const savedMessage = localStorage.getItem('feedback-form-state');
-//   if (savedMessage) {
-//     const obj = JSON.parse('feedback-form-state');
-//        = obj[email]
 
-//     JSON.parse('feedback-form-state');
-//   }
-//   return;
-// }
+function onPaste() {
+  const savedMessage = localStorage.getItem('feedback-form-state');
+  if (savedMessage) {
+    const obj = JSON.parse(savedMessage);
+    console.log(obj.email);
+    obj.email = '' ? (formInputRef.value = 'null') : (formInputRef.value = obj.email);
+    obj.message = '' ? (formMessageRef.value = 'null') : (formMessageRef.value = obj.message);
+  }
+  return;
+}
