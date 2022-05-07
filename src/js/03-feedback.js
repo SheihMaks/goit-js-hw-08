@@ -5,7 +5,10 @@ console.log(formInputRef);
 console.log(formMessageRef);
 onPaste();
 
-const formData = {};
+let formData = {
+  // email: '',
+  // messsage: '',
+};
 
 const onInputValue = ev => {
   formData[ev.target.name] = ev.target.value;
@@ -27,8 +30,8 @@ function onPaste() {
   if (savedMessage) {
     const obj = JSON.parse(savedMessage);
     console.log(obj.email);
-    obj.email = '' ? (formInputRef.value = 'null') : (formInputRef.value = obj.email);
-    obj.message = '' ? (formMessageRef.value = 'null') : (formMessageRef.value = obj.message);
+    obj.email = '' ? (obj.email = '') : (formInputRef.value = obj.email);
+    obj.message = '' ? (obj.message = '') : (formMessageRef.value = obj.message);
   }
   return;
 }
